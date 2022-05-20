@@ -13,6 +13,15 @@ public class Crocodile extends Actor
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     private int frames = 0;
+    private GreenfootImage[] mouthAnimation = new GreenfootImage[2];
+    
+    public Crocodile(){
+        super();
+        for(int i = 0; i < 2; i++){
+            mouthAnimation[i] = new GreenfootImage("crocodile" + (i+1) + ".png");
+        }
+    }
+    
     public void act()
     {
         MouseInfo m = Greenfoot.getMouseInfo();
@@ -33,11 +42,17 @@ public class Crocodile extends Actor
             setLocation(getX()+3, getY());
         }
         if(Greenfoot.isKeyDown("space")){
+            double radians = Math.toRadians(getRotation());
+            double sin = Math.sin(radians);
+            double cos = Math.cos(radians);
+            int dx = (int)Math.round(cos*101);
+            int dy = (int)Math.round(sin*101);
             Bullet bullet = new Bullet(rot);
-            getWorld().addObject(bullet,getX(),getY());
+            getWorld().addObject(bullet,getX()+dx,getY()+dy);
+            setImage(mouthAnimation[1]);
+        }else{
+            setImage(mouthAnimation[0]);
         }
-        Integer rotation = getRotation();
-        System.out.println(rotation.toString());
         frames++;
     }
 }
