@@ -13,6 +13,7 @@ public class Crocodile extends Actor
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     private int frames = 0;
+    private int shootDelayTracker = 0;
     private GreenfootImage[] mouthAnimation = new GreenfootImage[2];
     
     public Crocodile(){
@@ -41,15 +42,16 @@ public class Crocodile extends Actor
         if(Greenfoot.isKeyDown("right")){
             setLocation(getX()+3, getY());
         }
-        if(Greenfoot.isKeyDown("space")){
+        if(Greenfoot.isKeyDown("space") && frames - shootDelayTracker >= 15){
             double radians = Math.toRadians(getRotation());
             double sin = Math.sin(radians);
             double cos = Math.cos(radians);
             int dx = (int)Math.round(cos*101);
             int dy = (int)Math.round(sin*101);
-            Bullet bullet = new Bullet(rot);
-            getWorld().addObject(bullet,getX()+dx,getY()+dy);
+            Projectile spit = new Projectile(rot);
+            getWorld().addObject(spit,getX()+dx,getY()+dy);
             setImage(mouthAnimation[1]);
+            shootDelayTracker = frames;
         }else{
             setImage(mouthAnimation[0]);
         }

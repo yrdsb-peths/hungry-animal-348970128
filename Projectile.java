@@ -6,7 +6,7 @@ import java.util.*;
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Bullet extends Actor
+public class Projectile extends Actor
 {
     /**
      * Act - do whatever the bullet wants to do. This method is called whenever
@@ -16,7 +16,7 @@ public class Bullet extends Actor
     public double deg;
     private int distance = 5;
     
-    public Bullet(double deg){
+    public Projectile(double deg){
         GreenfootImage image = getImage();
         image.scale(50,50);
         setImage(image);
@@ -37,7 +37,8 @@ public class Bullet extends Actor
                 getWorld().removeObject(getOneIntersectingObject(Enemy.class));
                 MyWorld.score++;
             }catch(Exception e){
-                // This try/catch is only to prevent the bullet from trying to remove an already removed Enemy
+                // This try/catch is only to prevent the bullet from trying to remove an
+                // already removed Enemy, since enemy spawn speed can get really fast
             }
         }
         if(isAtEdge()){

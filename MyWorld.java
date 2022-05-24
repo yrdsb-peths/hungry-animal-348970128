@@ -31,7 +31,7 @@ public class MyWorld extends World
         if(frames%delay == 0){
             addObject(new Enemy(),Greenfoot.getRandomNumber(600),Greenfoot.getRandomNumber(400));
         }
-        if(frames%5 == 0 && delay >= 1){
+        if(frames%5 == 0 && delay > 1){
             delay--;
         }
         frames++;

@@ -37,7 +37,7 @@ public class StartWorld extends World
             labelMoveDirection = -1;
         }
         if(Greenfoot.isKeyDown("space")){
-            MyWorld world = new MyWorld();
+            Instructions world = new Instructions();
             Greenfoot.setWorld(world);
         }
     }
