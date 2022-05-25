@@ -13,15 +13,15 @@ public class Projectile extends Actor
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     
-    public double deg;
+    public double rotation;
     private int distance = 5;
+    private int touchedEnemies = 0;
     
     public Projectile(double deg){
         GreenfootImage image = getImage();
-        image.scale(50,50);
         setImage(image);
-        this.deg = deg;
-        turn((int)deg+90);
+        rotation = deg;
+        turn((int)rotation+90);
     }
     
     public void act()
@@ -29,20 +29,25 @@ public class Projectile extends Actor
         double radians = Math.toRadians(getRotation()-90);
         double sin = Math.sin(radians);
         double cos = Math.cos(radians);
-        int dx = (int)Math.round(cos *distance);
-        int dy = (int)Math.round(sin *distance);
-        setLocation(getX() +dx, getY() +dy);
+        int dx = (int)Math.round(cos * distance);
+        int dy = (int)Math.round(sin * distance);
+        setLocation(getX() + dx, getY() + dy);
+        removeEnemy();
+        if(isAtEdge() || touchedEnemies == 2){
+            getWorld().removeObject(this);
+        }
+    }
+    
+    public void removeEnemy(){
         while(getOneIntersectingObject(Enemy.class) != null){
             try {
                 getWorld().removeObject(getOneIntersectingObject(Enemy.class));
+                touchedEnemies++;
                 MyWorld.score++;
             }catch(Exception e){
-                // This try/catch is only to prevent the bullet from trying to remove an
+                // This try/catch is only to prevent the projectile from trying to remove an
                 // already removed Enemy, since enemy spawn speed can get really fast
             }
-        }
-        if(isAtEdge()){
-            getWorld().removeObject(this);
         }
     }
 }

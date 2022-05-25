@@ -24,21 +24,27 @@ public class StartWorld extends World
     }
     
     public void act(){
-        if(start.getY() > 340 && labelMoveDirection == -1){
-            start.setLocation(start.getX(),start.getY()-1);
-        }else if(start.getY() == 340){
-            start.setLocation(start.getX(),start.getY()+1);
-            labelMoveDirection = 1;
-        }
-        if(start.getY() < 350 && labelMoveDirection == 1){
-            start.setLocation(start.getX(),start.getY()+1);
-        }else if(start.getY() == 350){
-            start.setLocation(start.getX(),start.getY()-1);
-            labelMoveDirection = -1;
-        }
+        moveLabelUp();
+        moveLabelDown();
         if(Greenfoot.isKeyDown("space")){
             Instructions world = new Instructions();
             Greenfoot.setWorld(world);
+        }
+    }
+    
+    public void moveLabelDown(){
+        if(start.getY() < 350 && labelMoveDirection == 1){
+            start.setLocation(start.getX(),start.getY()+1);
+        }else if(start.getY() == 350){
+            labelMoveDirection = -1;
+        }
+    }
+    
+    public void moveLabelUp(){
+        if(start.getY() > 340 && labelMoveDirection == -1){
+            start.setLocation(start.getX(),start.getY()-1);
+        }else if(start.getY() == 340){
+            labelMoveDirection = 1;
         }
     }
 }

@@ -29,32 +29,40 @@ public class Crocodile extends Actor
         if(m != null){
             turnTowards(m.getX(),m.getY());
         }
-        double rot = (double)getRotation();
-        if(Greenfoot.isKeyDown("up")){
-            setLocation(getX(), getY()-3);
-        }
-        if(Greenfoot.isKeyDown("down")){
-            setLocation(getX(), getY()+3);
-        }
-        if(Greenfoot.isKeyDown("left")){
-            setLocation(getX()-3, getY());
-        }
-        if(Greenfoot.isKeyDown("right")){
-            setLocation(getX()+3, getY());
-        }
+        movement();
+        double rotation = (double)getRotation();
         if(Greenfoot.isKeyDown("space") && frames - shootDelayTracker >= 15){
-            double radians = Math.toRadians(getRotation());
-            double sin = Math.sin(radians);
-            double cos = Math.cos(radians);
-            int dx = (int)Math.round(cos*101);
-            int dy = (int)Math.round(sin*101);
-            Projectile spit = new Projectile(rot);
-            getWorld().addObject(spit,getX()+dx,getY()+dy);
+            addProjectile(rotation);
             setImage(mouthAnimation[1]);
             shootDelayTracker = frames;
         }else{
             setImage(mouthAnimation[0]);
         }
         frames++;
+    }
+    
+    public void movement(){
+        if(Greenfoot.isKeyDown("w")){
+            setLocation(getX(), getY()-2);
+        }
+        if(Greenfoot.isKeyDown("a")){
+            setLocation(getX()-2, getY());
+        }
+        if(Greenfoot.isKeyDown("s")){
+            setLocation(getX(), getY()+2);
+        }
+        if(Greenfoot.isKeyDown("d")){
+            setLocation(getX()+2, getY());
+        }
+    }
+    
+    public void addProjectile(double rotation){
+        double radians = Math.toRadians(getRotation());
+        double sin = Math.sin(radians);
+        double cos = Math.cos(radians);
+        int dx = (int)Math.round(cos*101);
+        int dy = (int)Math.round(sin*101);
+        Projectile spit = new Projectile(rotation);
+        getWorld().addObject(spit,getX()+dx,getY()+dy);
     }
 }

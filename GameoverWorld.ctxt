@@ -1,7 +1,9 @@
 #BlueJ class context
-comment0.target=GameoverWorld
+comment0.target=GameOverWorld
 comment0.text=\r\n\ Write\ a\ description\ of\ class\ GameoverWorld\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
 comment1.params=
-comment1.target=GameoverWorld()
+comment1.target=GameOverWorld()
 comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ GameoverWorld.\r\n\ \r\n
-numComments=2
+comment2.params=score
+comment2.target=void\ setHighScore(int)
+numComments=3

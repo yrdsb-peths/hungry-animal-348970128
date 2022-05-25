@@ -5,4 +5,6 @@ comment1.params=deg
 comment1.target=Projectile(double)
 comment2.params=
 comment2.target=void\ act()
-numComments=3
+comment3.params=
+comment3.target=void\ removeEnemy()
+numComments=4

@@ -11,7 +11,7 @@ public class MyWorld extends World
     public static int score = 0;
     public Label scoreLabel = new Label(score,50);
     private int frames = 0;
-    private int delay = 200;
+    private int enemySpawnDelay = 200;
 
     /**
      * Constructor for objects of class MyWorld.
@@ -28,12 +28,21 @@ public class MyWorld extends World
 
     public void act(){
         scoreLabel.setValue(score);
-        if(frames%delay == 0){
-            addObject(new Enemy(),Greenfoot.getRandomNumber(600),Greenfoot.getRandomNumber(400));
-        }
-        if(frames%5 == 0 && delay > 1){
-            delay--;
+        addEnemy();
+        if(score%5 == 0 && score != 0 && enemySpawnDelay > 50){
+            enemySpawnDelay -= 50;
         }
         frames++;
+    }
+    
+    public void addEnemy(){
+        if(frames%enemySpawnDelay == 0){
+            addObject(new Enemy(),Greenfoot.getRandomNumber(600),Greenfoot.getRandomNumber(400));
+        }
+    }
+    
+    public void gameOver(){
+        GameOverWorld world = new GameOverWorld();
+        Greenfoot.setWorld(world);
     }
 }
