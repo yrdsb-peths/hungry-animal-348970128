@@ -35,7 +35,7 @@ public class Crocodile extends Actor
             addProjectile(rotation);
             setImage(mouthAnimation[1]);
             shootDelayTracker = frames;
-        }else{
+        }else if(frames - shootDelayTracker >= 5){
             setImage(mouthAnimation[0]);
         }
         frames++;

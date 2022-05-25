@@ -42,6 +42,7 @@ public class Projectile extends Actor
         while(getOneIntersectingObject(Enemy.class) != null){
             try {
                 getWorld().removeObject(getOneIntersectingObject(Enemy.class));
+                Greenfoot.playSound("enemyDeathSound.mp3");
                 touchedEnemies++;
                 MyWorld.score++;
             }catch(Exception e){
